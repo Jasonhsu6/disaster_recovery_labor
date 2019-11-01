@@ -1,0 +1,23 @@
+{
+  "name": "disaster_recovery_labor",
+  "version": "1.0.0",
+  "description": "They constantly hire labor and equipment from local contractor on an hourly rate. This process involves timecard submission and approval process. This document describes the basic functionality of the process of filling out a timecard a submission process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonhsu6/disaster_recovery_labor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jasonhsu6/disaster_recovery_labor/issues"
+  },
+  "homepage": "https://github.com/Jasonhsu6/disaster_recovery_labor#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
