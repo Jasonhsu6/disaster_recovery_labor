@@ -4,12 +4,14 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var PORT = 3000;
 var url = "mongodb://jasonnelson:jasonnelson1@ds141168.mlab.com:41168/heroku_b67cn7n5"
+var cors =require("cors");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
 app.use(bodyParser.text());
+app.use(cors);
 
-require("./Routes/htmlRoutes")(app);
+require("./Routes/UserRoutes")(app);
 
 mongoose.connect(url,function(err){
     if(err){
