@@ -30,6 +30,7 @@ router.use(bodyParser.json());
 
 // GET: localhost/jobs/        get all the jobs
 router.get('/',async function(req, res) {
+    res.header("Access-Control-Allow-Origin","*")
     if(await verify(req.body.token) === true){
        Job.find(function(err, jobs) {
         if (err) {

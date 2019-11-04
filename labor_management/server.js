@@ -7,13 +7,11 @@ const jobs = require("./Routes/jobs");
 const machines = require("./Routes/machines");
 const timecards = require("./Routes/timecards");
 const users = require("./Routes/UserRoutes");
-const cors = require("cors")
 
 app.use("/users",users)
 app.use('/machines', machines);
 app.use('/timecards', timecards);
 app.use('/jobs', jobs);
-app.use(cors)
 
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true} ,  function(err){
     if(err){
