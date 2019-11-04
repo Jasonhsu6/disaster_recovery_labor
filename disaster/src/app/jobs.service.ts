@@ -14,7 +14,7 @@ export class JobsService {
   constructor(private http:HttpClient) { }
 
   getJobs(): Observable<any>{
-    var data = this.http.get(this._url).pipe(catchError(this.catcher))
+    var data = this.http.get(this._url).pipe(catchError(this.catcher));
     return data;
   }
   getOneJob(id): Observable<any>{

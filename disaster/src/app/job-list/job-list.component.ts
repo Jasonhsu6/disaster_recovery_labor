@@ -7,12 +7,12 @@ import { JobsService } from '../jobs.service';
   styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent implements OnInit {
-  public jobs: any[] = [];
+  public jobs: Array<any>;
   constructor(private _data: JobsService) { }
 
   ngOnInit() {
     this._data.getJobs().subscribe(data => this.jobs = data, 
-      () => console.log("Finished"))
+      () => console.log("Finished"));
   }
 
 }
