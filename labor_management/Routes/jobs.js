@@ -38,12 +38,12 @@ router.get('/',async function(req, res) {
         } else {
             res.json(jobs);
         }
+    })
   //  })
        // } 
       //  else{
         //    res.json({Result: "Not a user"})
        // }
-    
 })
 
 // GET: localhost/jobs/:id     get one job with id
