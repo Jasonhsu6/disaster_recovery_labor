@@ -1,6 +1,5 @@
 var Users = require("../Schemas/UserSchema");
 var hash = require('object-hash');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 function hasher(password) {
