@@ -14,14 +14,6 @@ app.use('/machines', machines);
 app.use('/timecards', timecards);
 app.use('/jobs', jobs);
 
-<<<<<<< HEAD
-app.use('/machines', machines);
-app.use('/timecards/', timecards);
-app.use('/jobs/', jobs);
-
-// require("./Routes/htmlRoutes")(app);
-=======
->>>>>>> 2d9d17c470e9297aaa7293ca0ed7fee0bd4c716c
 
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true} ,  function(err){
     if(err){
