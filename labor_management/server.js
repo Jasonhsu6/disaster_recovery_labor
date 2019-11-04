@@ -22,7 +22,7 @@ mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true} ,  func
     else{
         console.log("Database Connected")
     }
-    })
+})
 
 app.listen(PORT,function(){
     console.log("Listening on port " + PORT)
