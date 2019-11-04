@@ -1,4 +1,4 @@
-var db = require("../Schemas/index");
+var Users = require("../Schemas/UserSchema");
 var hash = require('object-hash');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
@@ -17,7 +17,7 @@ function genJWTCode(username, password) {
 }
 function verify(token){
    var decoded = jwt.verify(token,"secret");
-   db.Users.find({username:decoded.Username,hash_password:decoded.password},function(err,docs){
+   Users.find({username:decoded.Username,hash_password:decoded.password},function(err,docs){
        if(err){
            console.log("Error: " + err);
            return "Error: " + err;
@@ -44,7 +44,7 @@ module.exports = function (app) {
         console.log("Username: " + req.body.Username +  " Password: " + req.body.Password)
         var password = req.body.Password;
         var hashpass = hasher(password);
-        db.Users.find({ username: req.body.Username }, function (err, docs) {
+        Users.find({ username: req.body.Username }, function (err, docs) {
             if (err) {
                 console.log("Error: " + err)
             }
@@ -53,7 +53,7 @@ module.exports = function (app) {
                 res.json({ Result: "Username Taken" })
             }
             else {
-                db.Users.create({
+                Users.create({
                     is_admin: false,
                     username: req.body.Username,
                     hash_password:hashpass
@@ -65,14 +65,14 @@ module.exports = function (app) {
         })
 
     })
-    
+
     //Login Route
     app.post("/Login", function (req, res) {
         var username = req.body.Username;
         var password = req.body.Password;
         var hashpass = hasher(password);
         console.log("Hashed Password " + hashpass)
-        db.Users.find({ username: username,hash_password: hashpass }, function (err, docs) {
+        Users.find({ username: username,hash_password: hashpass }, function (err, docs) {
             if (err) {
                 console.log("Error: " + err)
                 res.json("Error: " + err)
