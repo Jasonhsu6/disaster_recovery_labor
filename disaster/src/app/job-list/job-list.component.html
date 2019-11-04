@@ -21,11 +21,11 @@
     </thead>
 
     <tbody>
-        <tr class="table-light">
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
-            <td>something</td>
+        <tr class="table-light" *ngFor="let job of jobs">
+            <td>{{ job.job_code }}</td>
+            <td>{{ job.description }}</td>
+            <td>{{ job.hourly_rate }}</td>
+            <td>{{ job.mhpd }}</td>
             <td>
                 <button>Edit</button>
             </td>

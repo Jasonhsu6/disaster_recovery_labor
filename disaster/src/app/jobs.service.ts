@@ -15,7 +15,7 @@ export class JobsService {
 
   getJobs(): Observable<any>{
     var data = this.http.get(this._url).pipe(catchError(this.catcher))
-    return data ;
+    return data;
   }
   getOneJob(id): Observable<any>{
     var data = this.http.get<any>(this._url +  "/" + id).pipe(catchError(this.catcher))
