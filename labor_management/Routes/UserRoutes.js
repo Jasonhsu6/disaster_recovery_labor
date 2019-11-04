@@ -1,6 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 var Users = require("../Schemas/UserSchema");
 var hash = require('object-hash');
 const jwt = require('jsonwebtoken');
+
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 function hasher(password) {
     return hash({ Password: password })
@@ -31,15 +37,14 @@ function verify(token){
 return;
 }
 
-module.exports = function (app) {
 
     //Home Route
-    app.get("/", function (req, res) {
+    router.get("/", function (req, res) {
         res.send("Welcome to the first page")
     })
 
     //Signup Route
-    app.post("/SignUp", function (req, res) {
+    router.post("/SignUp", function (req, res) {
         console.log("Username: " + req.body.Username +  " Password: " + req.body.Password)
         var password = req.body.Password;
         var hashpass = hasher(password);
@@ -66,7 +71,7 @@ module.exports = function (app) {
     })
 
     //Login Route
-    app.post("/Login", function (req, res) {
+    router.post("/Login", function (req, res) {
         var username = req.body.Username;
         var password = req.body.Password;
         var hashpass = hasher(password);
@@ -89,4 +94,4 @@ module.exports = function (app) {
             }
         })
     })
-}
+module.exports = router;

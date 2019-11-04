@@ -8,7 +8,9 @@ router.use(bodyParser.json());
 
 // GET: localhost/jobs/        get all the jobs
 router.get('/', function(req, res) {
+    console.log("function")
     Job.find(function(err, jobs) {
+        console.log("inside")
         if (err) {
             console.log(err);
         } else {
