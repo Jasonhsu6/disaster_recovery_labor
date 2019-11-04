@@ -5,8 +5,9 @@ var Users = require("../Schemas/UserSchema");
 var hash = require('object-hash');
 const jwt = require('jsonwebtoken');
 
-router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.text());
 
 function hasher(password) {
     return hash({ Password: password })
@@ -17,30 +18,39 @@ function genJWTCode(username, password) {
         "Username": username,
         "Password": hashpass
     },"secret")
-    console.log(token)
     return token
 }
-function verify(token){
-   var decoded = jwt.verify(token,"secret");
-   Users.find({username:decoded.Username,hash_password:decoded.password},function(err,docs){
-       if(err){
-           console.log("Error: " + err);
-           return "Error: " + err;
-       }
-      else if(docs.length > 0){
-           return true;
+async function verify(token){
+    try{
+          var decoded = jwt.verify(token,"secret");
+  const docs = await Users.find({username:decoded.Username,hash_password: decoded.Password})
+      if(docs.length > 0){
+          console.log("True")
+          return true
        }
        else{
-           return false;
+           console.log("False")
+           return false
        }
-   })
-return;
+    }
+    catch{
+        console.log("Invalid Signature")
+        return false
+    }
+ 
 }
 
 
     //Home Route
-    router.get("/", function (req, res) {
-        res.send("Welcome to the first page")
+    router.get("/",async function (req, res) {
+        // if(await verify(req.body.token) === true){
+        //     console.log(blah)
+        // } 
+        // else{
+        //     res.json({Result: "Not a user"})
+        // }
+        res.send("Welcome to the first page.")
+        
     })
 
     //Signup Route
@@ -63,7 +73,7 @@ return;
                     hash_password:hashpass
                 })
                 console.log("username: " + req.body.Username)
-                var token = genJWTCode(req.body.Username, hashpass)
+                var token = genJWTCode(req.body.Username, password)
                 res.json({ Result: "User Successfully Made", JWT: token })
             }
         })
@@ -75,6 +85,7 @@ return;
         var username = req.body.Username;
         var password = req.body.Password;
         var hashpass = hasher(password);
+        console.log("Username:  " + username + " " + " Password: " + password )
         console.log("Hashed Password " + hashpass)
         Users.find({ username: username,hash_password: hashpass }, function (err, docs) {
             if (err) {
@@ -82,7 +93,7 @@ return;
                 res.json("Error: " + err)
             }
             else if (docs.length > 0) {
-                var token = genJWTCode(username,hashpass)
+                var token = genJWTCode(username,password)
                 console.log("User found: " + docs)
                 res.json({ Username: docs[0].username,
                      isAdmin: docs[0].is_admin,
