@@ -32,7 +32,7 @@ router.use(bodyParser.json());
 // GET: localhost/machines/        get all the machines
 router.get('/', async function(req, res) {
     res.header("Access-Control-Allow-Origin","*");
-    // if(await verify(req.body.token) === true){
+    if(await verify(req.body.token) === true){
     Machine.find(function(err, machines) {
         if (err) {
             console.log(err);
@@ -40,10 +40,10 @@ router.get('/', async function(req, res) {
             res.json(machines);
         }
     })
-    // } 
-    // else{
-    //     res.json({Result: "Not a user"})
-    // }
+    } 
+    else{
+        res.json({Result: "Not a user"})
+    }
   
 })
 

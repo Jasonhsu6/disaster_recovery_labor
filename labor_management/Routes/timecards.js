@@ -32,7 +32,7 @@ router.use(bodyParser.json());
 // GET: localhost/timecards/        get all the timecards
 router.get('/', async function(req, res) {
     res.header("Access-Control-Allow-Origin","*");
-    // if(await verify(req.body.token) === true){
+    if(await verify(req.body.token) === true){
         TimeCard.find(function(err, timecards) {
         if (err) {
             console.log(err);
@@ -40,10 +40,10 @@ router.get('/', async function(req, res) {
             res.json(timecards);
         }
     })
-    // } 
-    // else{
-    //     res.json({Result: "Not a user"})
-    // }
+    } 
+    else{
+        res.json({Result: "Not a user"})
+    }
   
 })
 

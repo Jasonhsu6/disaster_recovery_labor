@@ -31,7 +31,7 @@ router.use(bodyParser.json());
 // GET: localhost/jobs/        get all the jobs
 router.get('/',async function(req, res) {
     res.header("Access-Control-Allow-Origin","*")
-   // if(await verify(req.body.token) === true){
+    if(await verify(req.body.token) === true){
        Job.find(function(err, jobs) {
         if (err) {
             console.log(err);
@@ -39,15 +39,15 @@ router.get('/',async function(req, res) {
             res.json(jobs);
         }
    })
-       // } 
-      //  else{
-        //    res.json({Result: "Not a user"})
-       // }
+        } 
+       else{
+            res.json({Result: "Not a user"})
+        }
 })
 
 // GET: localhost/jobs/:id     get one job with id
 router.get('/:id',async function(req, res) {
-  //  if(await verify(req.body.token) === true){
+    if(await verify(req.body.token) === true){
         Job.findById(req.params.id, function(err, job) {
         if (err) {
             console.log(err);
@@ -55,16 +55,16 @@ router.get('/:id',async function(req, res) {
             res.json(job);
         }
     })
-        //} 
-        // else{
-        //     res.json({Result: "Not a user"})
-        // }
+        } 
+        else{
+            res.json({Result: "Not a user"})
+        }
     
 })
 
 // POST: localhost/jobs/       create a new job
 router.post('/',async function(req, res) {
-   // if(await verify(req.body.token) === true){
+   if(await verify(req.body.token) === true){
      Job.create(req.body, function(err, job) {
         if (err) {
             console.log(err);
@@ -72,16 +72,16 @@ router.post('/',async function(req, res) {
             res.json(job);
         }
     })
-     //   } 
-        // else{
-        //     res.json({Result: "Not a user"})
-        // }
+       } 
+        else{
+            res.json({Result: "Not a user"})
+        }
    
 })
 
 // PUT: localhost/jobs/:id     update a job
 router.put('/:id',async function(req, res) {
-  //  if(await verify(req.body.token) === true){
+   if(await verify(req.body.token) === true){
      Job.findByIdAndUpdate(req.params.id, req.body, function(err, job) {
         if (err) {
             console.log(err);
@@ -89,16 +89,16 @@ router.put('/:id',async function(req, res) {
             res.json(job);
         }
     })
-        // } 
-        // else{
-        //     res.json({Result: "Not a user"})
-        // }
+        } 
+        else{
+            res.json({Result: "Not a user"})
+        }
    
 })
 
 // DELETE: localhost/jobs/:id  delete a nachine
 router.delete('/:id',async function(req, res) {
-   // if(await verify(req.body.token) === true){
+   if(await verify(req.body.token) === true){
         Job.findByIdAndRemove(req.params.id, req.body, function(err, job) {
         if (err) {
             console.log(err);
@@ -106,10 +106,10 @@ router.delete('/:id',async function(req, res) {
             res.json(job);
         }
     })
-        // } 
-        // else{
-        //     res.json({Result: "Not a user"})
-        // }
+        } 
+        else{
+            res.json({Result: "Not a user"})
+        }
   
 })
 module.exports = router;
