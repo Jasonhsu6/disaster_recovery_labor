@@ -25,14 +25,32 @@
             <td>{{ timecard.contractor }}</td>
             <td>{{ timecard.total_hours }} Hr.</td>
             <td>{{ timecard.total_amounts | currency }}</td>
-            <td *ngIf="timecard.is_approved ; else pending">
-                Approved
-            </td>
+            <ng-container *ngIf = "isUser; else noUser">
+                    <ng-container *ngIf="timecard.is_approved; then approved; else pending"></ng-container>
+                    <ng-template #approved>
+                     <td>
+                         Finalized
+                     </td>
+                    </ng-template>
+                    <ng-template #pending>
+                        <td>
+                            Open
+                        </td>
+                    </ng-template>
+            </ng-container>
+        <ng-template #noUser>
+            <ng-container *ngIf="timecard.is_approved; then approved; else pending"></ng-container>
+            <ng-template #approved>
+             <td>
+                 Approved
+             </td>
+            </ng-template>
             <ng-template #pending>
                 <td>
                     <button>Review</button>
                 </td>
             </ng-template>
+        </ng-template>
             
         </tr>
     </tbody>

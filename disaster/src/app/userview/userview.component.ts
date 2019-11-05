@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserviewComponent implements OnInit {
 
+  isUser = true
   constructor() { }
 
   ngOnInit() {
