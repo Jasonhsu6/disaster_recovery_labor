@@ -25,7 +25,7 @@
             <td>{{ timecard.contractor }}</td>
             <td>{{ timecard.total_hours }} Hr.</td>
             <td>{{ timecard.total_amounts | currency }}</td>
-            <td *ngIf="timecard.is_approved; else pending">
+            <td *ngIf="timecard.is_approved ; else pending">
                 Approved
             </td>
             <ng-template #pending>
@@ -33,6 +33,7 @@
                     <button>Review</button>
                 </td>
             </ng-template>
+            
         </tr>
     </tbody>
 </table>

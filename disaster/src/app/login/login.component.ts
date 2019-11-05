@@ -22,7 +22,7 @@ public loginInfo:FormGroup;
       Password:["",[Validators.required]]
     })
   }
-
+  
   onSubmit(){
     console.log("onSubmit clicked")
     this._data.Login(this.loginInfo.value.username,this.loginInfo.value.Password).subscribe(data => {

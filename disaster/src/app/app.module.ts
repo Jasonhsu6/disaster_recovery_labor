@@ -13,7 +13,8 @@ import { MachineListComponent } from './machine-list/machine-list.component';
 import { TimeCardListComponent } from './time-card-list/time-card-list.component';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import { SignupComponent } from './signup/signup.component';
-import { AdminComponent } from './admin/admin.component'
+import { AdminComponent } from './admin/admin.component';
+import { UserviewComponent } from './userview/userview.component'
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AdminComponent } from './admin/admin.component'
     TimeCardListComponent,
     LoginComponent,
     SignupComponent,
-    AdminComponent
+    AdminComponent,
+    UserviewComponent
   ],
   imports: [
     BrowserModule,
