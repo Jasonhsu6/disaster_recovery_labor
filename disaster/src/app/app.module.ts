@@ -8,12 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MachineListComponent } from './machine-list/machine-list.component';
+import { TimeCardListComponent } from './time-card-list/time-card-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    JobListComponent
+    JobListComponent,
+    MachineListComponent,
+    TimeCardListComponent
   ],
   imports: [
     BrowserModule,
