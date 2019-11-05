@@ -12,7 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MachineListComponent } from './machine-list/machine-list.component';
 import { TimeCardListComponent } from './time-card-list/time-card-list.component';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
-import { SignupComponent } from './signup/signup.component'
+import { SignupComponent } from './signup/signup.component';
+import { AdminComponent } from './admin/admin.component'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SignupComponent } from './signup/signup.component'
     MachineListComponent,
     TimeCardListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
