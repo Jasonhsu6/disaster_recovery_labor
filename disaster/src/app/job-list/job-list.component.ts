@@ -11,7 +11,15 @@ export class JobListComponent implements OnInit {
   constructor(private _data: JobsService) { }
 
   ngOnInit() {
-    this._data.getJobs().subscribe(data => this.jobs = data, 
+    this._data.getJobs().subscribe(data => {
+      if(data.Result === "Not a user"){
+        console.log("Not a user, replace this with a redirect after the routes are made")
+      }
+      else{
+        console.log(this.jobs)
+        this.jobs = data
+      }
+    }, 
       () => console.log("Finished"));
   }
 

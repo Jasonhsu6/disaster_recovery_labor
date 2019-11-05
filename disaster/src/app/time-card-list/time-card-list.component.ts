@@ -11,7 +11,14 @@ export class TimeCardListComponent implements OnInit {
   constructor(private _data: TimeCardsService) { }
 
   ngOnInit() {
-    this._data.getTimeCards().subscribe(data => this.timecards = data, 
+    this._data.getTimeCards().subscribe(data => {
+      if (data.Result === "Not a user") {
+        console.log("Not a user, replace this with a redirect after the routes are made")
+      }
+      else {
+        this.timecards = data
+      }
+    },
       () => console.log("Finished"));
   }
 

@@ -14,24 +14,24 @@ export class JobsService {
   constructor(private http:HttpClient) { }
 
   getJobs(): Observable<any>{
-    var data = this.http.get(this._url).pipe(catchError(this.catcher));
+    var data = this.http.post(this._url,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher));
     return data;
   }
   getOneJob(id): Observable<any>{
-    var data = this.http.get<any>(this._url +  "/" + id).pipe(catchError(this.catcher))
+    var data = this.http.post<any>(this._url +  "/" + id,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
 
   addJob(Job): Observable<any>{
-    var data = this.http.post<JobModel>(this._url,Job).pipe(catchError(this.catcher))
+    var data = this.http.post<JobModel>(this._url + "/add",{Job,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
   editJob(Job,ID): Observable<any>{
-    var data = this.http.put<JobModel>(this._url +"/"+ ID,Job).pipe(catchError(this.catcher))
+    var data = this.http.put<JobModel>(this._url +"/"+ ID,{Job,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
   deleteJob(ID): Observable<any>{
-    var data = this.http.delete<JobModel>(this._url + "/" + ID).pipe(catchError(this.catcher))
+    var data = this.http.post<JobModel>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     console.log("Data:" + JSON.stringify(data))
     return data
   }

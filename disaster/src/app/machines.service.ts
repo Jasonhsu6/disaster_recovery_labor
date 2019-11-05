@@ -14,16 +14,16 @@ export class MachinesService {
   constructor(private http:HttpClient) { }
 
   getMachines(): Observable<any>{
-    var data = this.http.get(this._url).pipe(catchError(this.catcher))
+    var data = this.http.post(this._url,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data ;
   }
   getOneMachine(id): Observable<any>{
-    var data = this.http.get<any>(this._url +  "/" + id).pipe(catchError(this.catcher))
+    var data = this.http.post<any>(this._url +  "/" + id,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
 
   addJob(Machine): Observable<any>{
-    var data = this.http.post<MachineModel>(this._url,Machine).pipe(catchError(this.catcher))
+    var data = this.http.post<MachineModel>(this._url+ "/add",{Machine,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
   editJob(Machine,ID): Observable<any>{
@@ -31,7 +31,7 @@ export class MachinesService {
     return data;
   }
   deleteJob(ID): Observable<any>{
-    var data = this.http.delete<MachineModel>(this._url + "/" + ID).pipe(catchError(this.catcher))
+    var data = this.http.post<MachineModel>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     console.log("Data:" + JSON.stringify(data))
     return data
   }

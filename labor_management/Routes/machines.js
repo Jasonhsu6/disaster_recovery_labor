@@ -30,7 +30,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // GET: localhost/machines/        get all the machines
-router.get('/', async function(req, res) {
+router.post('/', async function(req, res) {
     res.header("Access-Control-Allow-Origin","*");
     if(await verify(req.body.token) === true){
     Machine.find(function(err, machines) {
@@ -48,7 +48,7 @@ router.get('/', async function(req, res) {
 })
 
 // GET: localhost/machines/:id     get one machine by id
-router.get('/:id', async function(req, res) {
+router.post('/:id', async function(req, res) {
     if(await verify(req.body.token) === true){
   Machine.findById(req.params.id, function(err, machine) {
         if (err) {
@@ -65,7 +65,7 @@ router.get('/:id', async function(req, res) {
 })
 
 // POST: localhost/machines/       create a new machine
-router.post('/', async function(req, res) {
+router.post('/add', async function(req, res) {
     if(await verify(req.body.token) === true){
     Machine.create(req.body, function(err, machine) {
         if (err) {
@@ -99,7 +99,7 @@ router.put('/:id',async function(req, res) {
 })
 
 // DELETE: localhost/machines/:id  delete a nachine
-router.delete('/:id',async function(req, res) {
+router.post('/delete/:id',async function(req, res) {
     if(await verify(req.body.token) === true){
          Machine.findByIdAndRemove(req.params.id, req.body, function(err, machine) {
         if (err) {

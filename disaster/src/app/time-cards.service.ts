@@ -14,24 +14,24 @@ export class TimeCardsService {
   constructor(private http:HttpClient) { }
 
   getTimeCards(): Observable<any>{
-    var data = this.http.get(this._url).pipe(catchError(this.catcher))
+    var data = this.http.post(this._url,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data ;
   }
   getOneTimeCard(id): Observable<any>{
-    var data = this.http.get<any>(this._url +  "/" + id).pipe(catchError(this.catcher))
+    var data = this.http.post<any>(this._url +  "/" + id,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
 
   addTimeCard(TimeCard): Observable<any>{
-    var data = this.http.post<TimeCardModel>(this._url,TimeCard).pipe(catchError(this.catcher))
+    var data = this.http.post<TimeCardModel>(this._url + "/add",{TimeCard,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
   ApproveTimeCard(TimeCard,ID): Observable<any>{
-    var data = this.http.put<TimeCardModel>(this._url +"/"+ ID,TimeCard).pipe(catchError(this.catcher))
+    var data = this.http.put<TimeCardModel>(this._url +"/"+ ID,{TimeCard,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data;
   }
   deleteTimeCard(ID): Observable<any>{
-    var data = this.http.delete<TimeCardModel>(this._url + "/" + ID).pipe(catchError(this.catcher))
+    var data = this.http.post<TimeCardModel>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     console.log("Data:" + JSON.stringify(data))
     return data
   }

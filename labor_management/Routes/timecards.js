@@ -30,7 +30,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // GET: localhost/timecards/        get all the timecards
-router.get('/', async function(req, res) {
+router.post('/', async function(req, res) {
     res.header("Access-Control-Allow-Origin","*");
     if(await verify(req.body.token) === true){
         TimeCard.find(function(err, timecards) {
@@ -48,7 +48,7 @@ router.get('/', async function(req, res) {
 })
 
 // GET: localhost/timecards/:id     get one timecard with id
-router.get('/:id', async function(req, res) {
+router.post('/:id', async function(req, res) {
     if(await verify(req.body.token) === true){
         TimeCard.findById(req.params.id, function(err, timecard) {
         if (err) {
@@ -65,7 +65,7 @@ router.get('/:id', async function(req, res) {
 })
 
 // POST: localhost/timecards/       create a new timecard
-router.post('/', async function(req, res) {
+router.post('/add', async function(req, res) {
     if(await verify(req.body.token) === true){
      TimeCard.create(req.body, function(err, timecard) {
         if (err) {
@@ -99,7 +99,7 @@ router.put('/:id',async function(req, res) {
 })
 
 // DELETE: localhost/timecards/:id  delete a timecard
-router.delete('/:id', async function(req, res) {
+router.post('/delete/:id', async function(req, res) {
     if(await verify(req.body.token) === true){
     TimeCard.findByIdAndRemove(req.params.id, req.body, function(err, timecard) {
         if (err) {
