@@ -43,6 +43,7 @@ async function verify(token){
 
     //Home Route
     router.get("/",async function (req, res) {
+        res.header("Access-Control-Allow-Origin","*")
         // if(await verify(req.body.token) === true){
         //     console.log(blah)
         // } 
@@ -82,6 +83,7 @@ async function verify(token){
 
     //Login Route
     router.post("/Login", function (req, res) {
+        res.header("Access-Control-Allow-Origin","*")
         var username = req.body.Username;
         var password = req.body.Password;
         var hashpass = hasher(password);

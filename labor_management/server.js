@@ -7,7 +7,9 @@ const jobs = require("./Routes/jobs");
 const machines = require("./Routes/machines");
 const timecards = require("./Routes/timecards");
 const users = require("./Routes/UserRoutes");
+var cors = require('cors')
 
+app.use(cors())
 app.use("/users",users)
 app.use('/machines', machines);
 app.use('/timecards', timecards);

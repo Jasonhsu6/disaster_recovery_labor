@@ -13,12 +13,12 @@ export class UsersService {
 
   constructor(private http:HttpClient) { }
 
-  Login(User): Observable<any>{
-    var data = this.http.post<UserModel>(this._url + "/Login",User).pipe(catchError(this.catcher))
+  Login(Username,Password): Observable<any>{
+    var data = this.http.post<any>(this._url + "/Login",{Username:Username,Password:Password}).pipe(catchError(this.catcher))
     return data;
   }
-  Signup(User): Observable<any>{
-    var data = this.http.post<UserModel>(this._url +"/Signup",User).pipe(catchError(this.catcher))
+  Signup(Username,Password): Observable<any>{
+    var data = this.http.post<any>(this._url +"/Signup",{Username,Password}).pipe(catchError(this.catcher))
     return data;
   }
   catcher(error: HttpErrorResponse){

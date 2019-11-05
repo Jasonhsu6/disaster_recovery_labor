@@ -7,9 +7,12 @@ import {UsersService} from './users.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JobListComponent } from './job-list/job-list.component';
+import {LoginComponent} from "./login/login.component"
 import { HttpClientModule } from '@angular/common/http';
 import { MachineListComponent } from './machine-list/machine-list.component';
 import { TimeCardListComponent } from './time-card-list/time-card-list.component';
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+import { SignupComponent } from './signup/signup.component'
 
 
 @NgModule({
@@ -17,12 +20,16 @@ import { TimeCardListComponent } from './time-card-list/time-card-list.component
     AppComponent,
     JobListComponent,
     MachineListComponent,
-    TimeCardListComponent
+    TimeCardListComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [JobsService,MachinesService,TimeCardsService,UsersService],
   bootstrap: [AppComponent]
