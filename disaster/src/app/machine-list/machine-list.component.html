@@ -23,7 +23,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "refresh()">Close</button>
                 <button type="button" class="btn btn-primary" (click) ="addMach()">Add Machine</button>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
                 <button type="button" class="btn btn-primary" (click) = "editMach(ID)">Save changes</button>
             </div>
         </div>
@@ -96,7 +96,7 @@
                     <button data-toggle="modal" data-target="#EditMachine" (click) = "editMachID(machine._id)">Edit</button>
                 </td>
                 <td>
-                    <button (click) = "deleteMach(machine._id)" >Delete</button>
+                    <button (click) = "deleteMach(machine._id)" (click) = "refresh()" >Delete</button>
                 </td>
             </tr>
         </tbody>

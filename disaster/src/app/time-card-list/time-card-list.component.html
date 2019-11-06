@@ -1,10 +1,43 @@
+<div class="modal fade" id="#AddTimecard" tabindex="-1" role="dialog" aria-labelledby="AddMachine" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Add New Timecard</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addMachine">
+                    <label>Machine Code</label>
+                    <input type="text" formControlName="MachineCode">
+                    <br>
+                    <label>Description</label>
+                    <input type="text" formControlName="Description">
+                    <br>
+                    <label>Hourly Rate</label>
+                    <input type="number" formControlName="Hourly_Rate">
+                    <br>
+                    <label>Max Hours Per Day</label>
+                    <input type="number" formControlName="Mhpd">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "refresh()">Close</button>
+                <button type="button" class="btn btn-primary" (click) ="addMach()">Add Machine</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class = "timecards" style="display: none;">
 <div class='content'>
     <p>Timecard Management</p>
 </div>
 
 <div>
-    <button>Add New</button>
+    <button data-toggle="modal" data-target="#AddTimecard">Add New</button>
 </div>
 <p></p>
 

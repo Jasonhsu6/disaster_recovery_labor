@@ -13,23 +13,26 @@ export class MachineListComponent implements OnInit {
   public machines: Array<any>;
   public machine: MachineModel;
   public ID:number;
-  constructor(private _data: MachinesService,private fp:FormBuilder, private route: ActivatedRoute, private router:Router) { }
+  constructor(private _data: MachinesService,private fp:FormBuilder, private route: ActivatedRoute, private router:Router) { 
+  }
 
 addMachine:FormGroup
 editMachine:FormGroup
 
+
   ngOnInit() {
+
   this.addMachine = this.fp.group({
     MachineCode:["",[Validators.required]],
     Description:["",[Validators.required]],
     Hourly_Rate:["",[Validators.required]],
-    Mhpd:["",[Validators.required]]
+    Mhpd:["",[Validators.required,Validators.max(24)]]
   })
   this.editMachine = this.fp.group({
     MachineCode:["",[Validators.required]],
     Description:["",[Validators.required]],
     Hourly_Rate:["",[Validators.required]],
-    Mhpd:["",[Validators.required]]
+    Mhpd:["",[Validators.required,Validators.max(24)]]
   })
   
 
@@ -55,12 +58,18 @@ editMachID(id){
   this.ID = id
 }
 
+refresh(){
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/admin']);
+})
+}
+
   addMach(){
     console.log(this.addMachine.value)
     this._data.addMachine(this.addMachine.value.MachineCode,this.addMachine.value.Description,
        this.addMachine.value.Hourly_Rate,this.addMachine.value.Mhpd)
-    .subscribe(data => {this.userCheck(data); console.log("Machine Added: " + this.addMachine.value);})
-  }
+    .subscribe(data => {this.userCheck(data); console.log("Machine Added: " + this.addMachine.value);} )
+   }
   editMach(id){
     console.log("ID: "+ id)
     console.log("Edit Mach Value: " + this.editMachine.value)
@@ -71,6 +80,4 @@ editMachID(id){
 
   deleteMach(id){
     this._data.deleteMachine(id).subscribe(data=>console.log("Machine Deleted: " + id))
-  }
-
-}
+}}
