@@ -9,9 +9,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'disaster';
 
-  constructor(private route:Router){}
+  constructor(private route:Router){  
+    this.token = localStorage.getItem('token')
+  }
 
   Logout(){
 this.route.navigateByUrl("/")
+localStorage.removeItem("token")
   }
+  public token:string;
 }
