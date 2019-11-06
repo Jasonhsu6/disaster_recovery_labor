@@ -68,11 +68,13 @@ router.post('/:id', async function(req, res) {
 router.post('/add', async function(req, res) {
     console.log("Add Function called: "+req.body)
     var machine = {
+        _id:req.body.id,
         description:req.body.description,
         hourly_rate:req.body.hourly_rate,
         machine_code:req.body.machine_code,
         mhpd:req.body.mhpd
     }
+    console.log(machine)
     if(await verify(req.body.token) === true){
     Machine.create(machine, function(err, machine) {
         if (err) {
@@ -90,6 +92,7 @@ router.post('/add', async function(req, res) {
 
 // PUT: localhost/machines/:id     update a machine
 router.put('/:id',async function(req, res) {
+            console.log(req.body)
     if(await verify(req.body.token) === true){
    Machine.findByIdAndUpdate(req.params.id, req.body, function(err, machine) {
         if (err) {

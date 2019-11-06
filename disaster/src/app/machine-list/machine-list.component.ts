@@ -62,11 +62,11 @@ editMachID(id){
     .subscribe(data => {this.userCheck(data); console.log("Machine Added: " + this.addMachine.value)})
   }
   editMach(id){
-    this.machine.machine_code = this.addMachine.value.MachineCode
-    this.machine.description = this.addMachine.value.Description
-    this.machine.hourly_rate = this.addMachine.value.Hourly_Rate
-    this.machine.mhpd = this.addMachine.value.Mhpd
-    this._data.editMachine(this.machine,id).subscribe(data => console.log("Machine Edited: " + this.editMachine.value))
+    console.log("ID: "+ id)
+    console.log("Edit Mach Value: " + this.editMachine.value)
+    this._data.editMachine(this.editMachine.value.MachineCode,this.editMachine.value.Description,
+      this.editMachine.value.Hourly_Rate,this.editMachine.value.Mhpd,id)
+    .subscribe(data => console.log("Machine Edited: " + this.editMachine.value))
   }
 
   deleteMach(id){

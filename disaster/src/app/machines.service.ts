@@ -34,8 +34,10 @@ export class MachinesService {
     })
     return data;
   }
-  editMachine(Machine,ID): Observable<any>{
-    var data = this.http.put<any>(this._url +"/"+ ID,Machine).pipe(catchError(this.catcher))
+  editMachine(machine_code,description,hourly_rate,mhpd,ID): Observable<any>{
+    var token = localStorage.getItem("token")
+    console.log({machine_code,description,hourly_rate,mhpd,ID})
+    var data = this.http.put<any>(this._url +"/"+ ID,{machine_code,description,hourly_rate,mhpd,token}).pipe(catchError(this.catcher))
     return data;
   }
   deleteMachine(ID): Observable<any>{
