@@ -82,6 +82,7 @@
             <td>Total hours</td>
             <td>Total Amounts</td>
             <td>Status</td>
+            <td *ngIf="isUser==false;">Delete</td>
         </tr>
     </thead>
 
@@ -114,6 +115,9 @@
             <ng-template #pending>
                 <td>
                     <button (click)="popTime(timecard._id)" type = "button" data-toggle="modal" data-target="#ApproveTimecard">Review</button>
+                </td>
+                <td>
+                    <button (click)="deleTime(timecard._id)">Delete</button>
                 </td>
             </ng-template>
         </ng-template>
