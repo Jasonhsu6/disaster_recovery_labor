@@ -59,7 +59,7 @@ editMachID(id){
     console.log(this.addMachine.value)
     this._data.addMachine(this.addMachine.value.MachineCode,this.addMachine.value.Description,
        this.addMachine.value.Hourly_Rate,this.addMachine.value.Mhpd)
-    .subscribe(data => {this.userCheck(data); console.log("Machine Added: " + this.addMachine.value)})
+    .subscribe(data => {this.userCheck(data); console.log("Machine Added: " + this.addMachine.value);})
   }
   editMach(id){
     console.log("ID: "+ id)

@@ -30,9 +30,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // GET: localhost/machines/        get all the machines
-router.post('/', async function(req, res) {
+router.get('/', async function(req, res) {
     res.header("Access-Control-Allow-Origin","*");
-    if(await verify(req.body.token) === true){
+    if(await verify(req.header('token')) === true){
     Machine.find(function(err, machines) {
         if (err) {
             console.log(err);
@@ -48,8 +48,8 @@ router.post('/', async function(req, res) {
 })
 
 // GET: localhost/machines/:id     get one machine by id
-router.post('/:id', async function(req, res) {
-    if(await verify(req.body.token) === true){
+router.get('/:id', async function(req, res) {
+    if(await verify(req.header('token')) === true){
   Machine.findById(req.params.id, function(err, machine) {
         if (err) {
             console.log(err);
@@ -67,16 +67,8 @@ router.post('/:id', async function(req, res) {
 // POST: localhost/machines/       create a new machine
 router.post('/add', async function(req, res) {
     console.log("Add Function called: "+req.body)
-    var machine = {
-        _id:req.body.id,
-        description:req.body.description,
-        hourly_rate:req.body.hourly_rate,
-        machine_code:req.body.machine_code,
-        mhpd:req.body.mhpd
-    }
-    console.log(machine)
-    if(await verify(req.body.token) === true){
-    Machine.create(machine, function(err, machine) {
+    if(await verify(req.header('token')) === true){
+    Machine.create(req.body, function(err, machine) {
         if (err) {
             console.log(err);
         } else {
@@ -93,7 +85,7 @@ router.post('/add', async function(req, res) {
 // PUT: localhost/machines/:id     update a machine
 router.put('/:id',async function(req, res) {
             console.log(req.body)
-    if(await verify(req.body.token) === true){
+    if(await verify(req.header('token')) === true){
    Machine.findByIdAndUpdate(req.params.id, req.body, function(err, machine) {
         if (err) {
             console.log(err);
@@ -109,8 +101,8 @@ router.put('/:id',async function(req, res) {
 })
 
 // DELETE: localhost/machines/:id  delete a nachine
-router.post('/delete/:id',async function(req, res) {
-    if(await verify(req.body.token) === true){
+router.delete('/delete/:id',async function(req, res) {
+    if(await verify(req.header('token')) === true){
          Machine.findByIdAndRemove(req.params.id, req.body, function(err, machine) {
         if (err) {
             console.log(err);
