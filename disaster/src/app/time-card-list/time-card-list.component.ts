@@ -35,9 +35,17 @@ export class TimeCardListComponent implements OnInit {
   }
 
   refresh(){
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    if(this.isUser===false){
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/admin']);
-  })
+      })
+    }
+    else{
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/contractor']);
+    })
+    
+  }
 }
 
   userCheck(data){
