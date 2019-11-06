@@ -22,15 +22,23 @@ export class MachinesService {
     return data;
   }
 
-  addJob(Machine): Observable<any>{
-    var data = this.http.post<MachineModel>(this._url+ "/add",{Machine,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
+  addMachine(machine_code,description,hourly_rate,mhpd): Observable<any>{
+    console.log("Event is getting started")
+    var data = this.http.post<any>(this._url+ "/add",{machine_code,description,hourly_rate,mhpd,token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
+    console.log({
+      machine_code,
+      description,
+      hourly_rate,
+      mhpd,
+      token:localStorage.getItem("token")
+    })
     return data;
   }
-  editJob(Machine,ID): Observable<any>{
-    var data = this.http.put<MachineModel>(this._url +"/"+ ID,Machine).pipe(catchError(this.catcher))
+  editMachine(Machine,ID): Observable<any>{
+    var data = this.http.put<any>(this._url +"/"+ ID,Machine).pipe(catchError(this.catcher))
     return data;
   }
-  deleteJob(ID): Observable<any>{
+  deleteMachine(ID): Observable<any>{
     var data = this.http.post<MachineModel>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     console.log("Data:" + JSON.stringify(data))
     return data

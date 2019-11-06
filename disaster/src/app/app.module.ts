@@ -14,7 +14,8 @@ import { TimeCardListComponent } from './time-card-list/time-card-list.component
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import { SignupComponent } from './signup/signup.component';
 import { AdminComponent } from './admin/admin.component';
-import { UserviewComponent } from './userview/userview.component'
+import { UserviewComponent } from './userview/userview.component';
+import { WelcomeComponent} from "./welcome/welcome.component"
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UserviewComponent } from './userview/userview.component'
     LoginComponent,
     SignupComponent,
     AdminComponent,
-    UserviewComponent
+    UserviewComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

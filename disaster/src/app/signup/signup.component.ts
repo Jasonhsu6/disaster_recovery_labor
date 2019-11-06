@@ -1,6 +1,7 @@
 import { Component, OnInit,  } from '@angular/core';
 import {FormGroup,FormsModule,FormBuilder, Validators} from '@angular/forms'
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import { UsersService } from '../users.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private _data:UsersService, private fp:FormBuilder) { }
+  constructor(private _data:UsersService, private fp:FormBuilder,private router:Router) { }
 
   public signupInfo:FormGroup;
   
@@ -26,9 +27,14 @@ export class SignupComponent implements OnInit {
       this._data.Signup(this.signupInfo.value.username,this.signupInfo.value.Password).subscribe(data => {
         console.log(data)
         localStorage.setItem("token",data.JWT)
+        this.router.navigateByUrl("/contractor")
       },
       err => console.log(err),
       ()=>console.log("Complete"))
+    }
+    back(){
+      this.router.navigateByUrl("/")
+
     }
   
   }

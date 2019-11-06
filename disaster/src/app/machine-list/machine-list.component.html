@@ -1,39 +1,105 @@
-<div class = "machines" style="display: none;">
-<div class='content'>
-    <p>Machine Management</p>
+<div class="modal fade" id="AddMachine" tabindex="-1" role="dialog" aria-labelledby="AddMachine" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Add New Machine</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addMachine">
+                    <label>Machine Code</label>
+                    <input type="text" formControlName="MachineCode">
+                    <br>
+                    <label>Description</label>
+                    <input type="text" formControlName="Description">
+                    <br>
+                    <label>Hourly Rate</label>
+                    <input type="number" formControlName="Hourly_Rate">
+                    <br>
+                    <label>Max Hours Per Day</label>
+                    <input type="number" formControlName="Mhpd">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click) ="addMach()">Add Machine</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <button>Add New</button>
+<div class="modal fade" id="EditMachine" tabindex="-1" role="dialog" aria-labelledby="EditMachine" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Edit Machine</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editMachine">
+                    <label>Machine Code</label>
+                    <input type="text" formControlName="MachineCode">
+                    <br>
+                    <label>Description</label>
+                    <input type="text" formControlName="Description">
+                    <br>
+                    <label>Hourly Rate</label>
+                    <input type="number" formControlName="Hourly_Rate">
+                    <br>
+                    <label>Max Hours Per Day</label>
+                    <input type="number" formControlName="Mhpd">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click) = "editMach(ID)">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
-<p></p>
 
 
-<table class="table table-hover table-bordered">
-    <thead>
-        <tr class="table-warning">
-            <td>Machine_code</td>
-            <td>Description</td>
-            <td>Hourly rate</td>
-            <td>Max hours per day</td>
-            <td></td>
-            <td></td>
-        </tr>
-    </thead>
+<div class="machines" style="display: none;">
+    <div class='content'>
+        <p>Machine Management</p>
+    </div>
 
-    <tbody>
-        <tr class="table-light" *ngFor="let machine of machines;">
-            <td>{{ machine.machine_code }}</td>
-            <td>{{ machine.description }}</td>
-            <td>{{ machine.hourly_rate | currency }}/Hr.</td>
-            <td>{{ machine.mhpd }} Hr.</td>
-            <td>
-                <button>Edit</button>
-            </td>
-            <td>
-                <button>Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <div>
+        <button type="button" data-toggle="modal" data-target="#AddMachine">Add New</button>
+    </div>
+    <p></p>
+
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <td>Machine_code</td>
+                <td>Description</td>
+                <td>Hourly rate</td>
+                <td>Max hours per day</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="table-light" *ngFor="let machine of machines;">
+                <td>{{ machine.machine_code }}</td>
+                <td>{{ machine.description }}</td>
+                <td>{{ machine.hourly_rate | currency }}/Hr.</td>
+                <td>{{ machine.mhpd }} Hr.</td>
+                <td>
+                    <button data-toggle="modal" data-target="#EditMachine" (click) = "editMachID(machine._id)">Edit</button>
+                </td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>

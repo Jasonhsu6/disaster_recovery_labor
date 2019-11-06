@@ -66,8 +66,15 @@ router.post('/:id', async function(req, res) {
 
 // POST: localhost/machines/       create a new machine
 router.post('/add', async function(req, res) {
+    console.log("Add Function called: "+req.body)
+    var machine = {
+        description:req.body.description,
+        hourly_rate:req.body.hourly_rate,
+        machine_code:req.body.machine_code,
+        mhpd:req.body.mhpd
+    }
     if(await verify(req.body.token) === true){
-    Machine.create(req.body, function(err, machine) {
+    Machine.create(machine, function(err, machine) {
         if (err) {
             console.log(err);
         } else {
