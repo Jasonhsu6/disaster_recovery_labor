@@ -29,9 +29,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // GET: localhost/jobs/        get all the jobs
-router.post('/',async function(req, res) {
+router.get('/',async function(req, res) {
     res.header("Access-Control-Allow-Origin","*")
-    if(await verify(req.body.token) === true){
+    if(await verify(req.header('token')) === true){
        Job.find(function(err, jobs) {
         if (err) {
             console.log(err);
@@ -47,8 +47,8 @@ router.post('/',async function(req, res) {
 })
 
 // GET: localhost/jobs/:id     get one job with id
-router.post('/:id',async function(req, res) {
-    if(await verify(req.body.token) === true){
+router.get('/:id',async function(req, res) {
+    if(await verify(req.header('token')) === true){
         Job.findById(req.params.id, function(err, job) {
         if (err) {
             console.log(err);
@@ -65,7 +65,7 @@ router.post('/:id',async function(req, res) {
 
 // POST: localhost/jobs/       create a new job
 router.post('/add',async function(req, res) {
-   if(await verify(req.body.token) === true){
+   if(await verify(req.header('token')) === true){
      Job.create(req.body, function(err, job) {
         if (err) {
             console.log(err);
@@ -82,7 +82,7 @@ router.post('/add',async function(req, res) {
 
 // PUT: localhost/jobs/:id     update a job
 router.put('/:id',async function(req, res) {
-   if(await verify(req.body.token) === true){
+   if(await verify(req.header('token')) === true){
      Job.findByIdAndUpdate(req.params.id, req.body, function(err, job) {
         if (err) {
             console.log(err);
@@ -98,8 +98,8 @@ router.put('/:id',async function(req, res) {
 })
 
 // DELETE: localhost/jobs/:id  delete a nachine
-router.post('/delete/:id',async function(req, res) {
-   if(await verify(req.body.token) === true){
+router.delete('/delete/:id',async function(req, res) {
+   if(await verify(req.header('token')) === true){
         Job.findByIdAndRemove(req.params.id, req.body, function(err, job) {
         if (err) {
             console.log(err);
