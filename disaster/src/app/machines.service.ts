@@ -41,8 +41,8 @@ export class MachinesService {
     return data;
   }
   deleteMachine(ID): Observable<any>{
-    var data = this.http.post<MachineModel>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
-    console.log("Data:" + JSON.stringify(data))
+    console.log("ID: " + ID)
+    var data = this.http.post<any>(this._url + "/delete/" + ID,{token:localStorage.getItem("token")}).pipe(catchError(this.catcher))
     return data
   }
 
