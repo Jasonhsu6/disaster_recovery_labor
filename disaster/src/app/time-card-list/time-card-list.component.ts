@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TimeCardsService } from '../time-cards.service';
+import { Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-time-card-list',
@@ -9,11 +11,17 @@ import { TimeCardsService } from '../time-cards.service';
 export class TimeCardListComponent implements OnInit {
   @Input('isUser') isUser: boolean;
   public timecards: Array<any>;
-  constructor(private _data: TimeCardsService) { }
+  public addTimecard:FormGroup
+  constructor(private _data: TimeCardsService,private router:Router,private fp:FormBuilder) { }
 
   ngOnInit() {
-    console.log(this.isUser);
 
+    this.addTimecard = this.fp.group({
+      SiteCode:["",[Validators.required]],
+      Contractor:["",[Validators.required]],
+      TotalHours:["",[Validators.required]],
+      TotalAmount:["",[Validators.required]]
+    })
 
     this._data.getTimeCards().subscribe(data => {
       if (data.Result === "Not a user") {
@@ -25,5 +33,49 @@ export class TimeCardListComponent implements OnInit {
     },
       () => console.log("Finished"));
   }
+
+  refresh(){
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/admin']);
+  })
+}
+
+  userCheck(data){
+    if(data.Result === "Not a user"){
+      this.router.navigateByUrl("/")
+    }
+    else{}
+  }
+
+  addTime(){
+    console.log(this.addTimecard.value)
+    this._data.addTimeCard(this.addTimecard.value.SiteCode,this.addTimecard.value.Contractor,
+      this.addTimecard.value.TotalHours,this.addTimecard.value.TotalAmount,false)
+    .subscribe(data => {this.userCheck(data); console.log("Timecard Added: " + this.addTimecard.value);} )
+   }
+
+  id : ""
+  contractor:""
+  site_code:""
+  total_hours:1
+  total_amounts:1
+
+
+   popTime(ID){
+   this._data.getOneTimeCard(ID).subscribe( data => {
+     console.log(data)
+     this.id = data._id
+     this.contractor = data.contractor,
+     this.site_code = data.site_code,
+     this.total_hours= data.total_hours,
+     this.total_amounts = data.total_amounts
+    } )
+    console.log("Pop running")
+   }
+
+   approveTimecard(){
+     console.log({id:this.id,contractor:this.contractor,site_code:this.site_code,total_hours:this.total_hours,total_amounts:this.total_amounts})
+     this._data.ApproveTimeCard(this.site_code,this.contractor,this.total_hours,this.total_amounts,true,this.id).subscribe(data => console.log(data))
+   }
 
 }

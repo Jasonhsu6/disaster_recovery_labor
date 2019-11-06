@@ -1,4 +1,4 @@
-<div class="modal fade" id="#AddTimecard" tabindex="-1" role="dialog" aria-labelledby="AddMachine" aria-hidden="true">
+<div class="modal fade" id="AddTimecard" tabindex="-1" role="dialog" aria-labelledby="AddTimecard" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,23 +8,56 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="addMachine">
-                    <label>Machine Code</label>
-                    <input type="text" formControlName="MachineCode">
+                <form [formGroup]="addTimecard">
+                    <label>Site Code:</label>
+                    <input type="text" formControlName="SiteCode">
                     <br>
-                    <label>Description</label>
-                    <input type="text" formControlName="Description">
+                    <label>Contractor:</label>
+                    <input type="text" formControlName="Contractor">
                     <br>
-                    <label>Hourly Rate</label>
-                    <input type="number" formControlName="Hourly_Rate">
+                    <label>Total Hours:</label>
+                    <input type="number" formControlName="TotalHours">
                     <br>
-                    <label>Max Hours Per Day</label>
-                    <input type="number" formControlName="Mhpd">
+                    <label>Total Amount:</label>
+                    <input type="number" formControlName="TotalAmount">
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "refresh()">Close</button>
-                <button type="button" class="btn btn-primary" (click) ="addMach()">Add Machine</button>
+                <button type="button" class="btn btn-primary" (click) ="addTime()">Add Timecard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ApproveTimecard" tabindex="-1" role="dialog" aria-labelledby="ApproveTimecard" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Approve Timecard</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>Site Code:</label>
+                    <h2>{{site_code}}</h2>
+                    <br>
+                    <label>Contractor:</label>
+                    <h2>{{contractor}}</h2>
+                    <br>
+                    <label>Total Hours:</label>
+                    <h2>{{total_hours}}</h2>
+                    <br>
+                    <label>Total Amount:</label>
+                    <h2>{{total_amounts}}</h2>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "refresh()">Close</button>
+                <button type="button" class="btn btn-primary" (click) ="approveTimecard()">Approve</button>
             </div>
         </div>
     </div>
@@ -37,7 +70,7 @@
 </div>
 
 <div>
-    <button data-toggle="modal" data-target="#AddTimecard">Add New</button>
+    <button type = "button" data-toggle="modal" data-target="#AddTimecard">Add New</button>
 </div>
 <p></p>
 
@@ -80,7 +113,7 @@
             </ng-template>
             <ng-template #pending>
                 <td>
-                    <button>Review</button>
+                    <button (click)="popTime(timecard._id)" type = "button" data-toggle="modal" data-target="#ApproveTimecard">Review</button>
                 </td>
             </ng-template>
         </ng-template>
