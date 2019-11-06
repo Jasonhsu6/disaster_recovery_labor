@@ -36,7 +36,6 @@ export class TimeCardsService {
   }
   deleteTimeCard(ID): Observable<any>{
     var data = this.http.delete<any>(this._url + "/delete/" + ID,httpOptions).pipe(catchError(this.catcher))
-    console.log("Data:" + JSON.stringify(data))
     return data
   }
 

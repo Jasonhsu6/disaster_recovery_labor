@@ -75,7 +75,12 @@ export class TimeCardListComponent implements OnInit {
 
    approveTimecard(){
      console.log({id:this.id,contractor:this.contractor,site_code:this.site_code,total_hours:this.total_hours,total_amounts:this.total_amounts})
-     this._data.ApproveTimeCard(this.site_code,this.contractor,this.total_hours,this.total_amounts,true,this.id).subscribe(data => console.log(data))
+     this._data.ApproveTimeCard(this.site_code,this.contractor,this.total_hours,this.total_amounts,true,this.id).subscribe(data => {this.userCheck(data); console.log(data)})
+   }
+
+   deleTime(timeID){
+     this._data.deleteTimeCard(timeID).subscribe(data=>{this.userCheck(data);console.log(data)})
+     this.refresh()
    }
 
 }
