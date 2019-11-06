@@ -1,0 +1,16 @@
+<div class="wrapper fadeInDown">
+        <div id="formContent">  
+        <h2 style="text-align: center;color: black;">Sign Up</h2>
+        <br>
+          <!-- Signup Form -->
+          <form [formGroup]="signupInfo">
+            <input type="text" class="fadeIn second" placeholder="Username" formControlName="username">
+            <input type="password" class="fadeIn third"  placeholder="password" formControlName = "Password">
+            <br>
+            <br>
+            <button type="button" class="fadeIn fourth" (click)="onSubmit()">Sign Up</button>
+            <button type="button" class="fadeIn fourth" (click)="back()">Back</button>
+          </form>
+      
+        </div>
+      </div>

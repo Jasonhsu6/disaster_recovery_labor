@@ -1,0 +1,18 @@
+p {
+    font-size: 24px;
+    font-family: inherit;
+}
+
+thead {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+button {
+    align-content: center;
+}
+

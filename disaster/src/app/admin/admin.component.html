@@ -1,0 +1,32 @@
+ <!-- Side navigation -->
+ <div class="sidebar">
+        <a href="/admin" onclick="
+        event.preventDefault()
+            $('.machines').fadeOut('fast',function(){
+                $('.timecards').fadeOut('fast',function(){
+                $('.jobs').fadeIn('fast');
+                })
+            })
+            ">Job Code Management</a>
+        <a href="/admin" onclick="
+        event.preventDefault()
+          $('.timecards').fadeOut('fast',function(){
+            $('.jobs').fadeOut('fast',function(){
+            $('.machines').fadeIn('fast');
+            })
+        }); ">Machine Management</a>
+        <a href="/admin" onclick="
+        event.preventDefault()
+          $('.machines').fadeOut('fast',function(){
+            $('.jobs').fadeOut('fast',function(){
+            $('.timecards').fadeIn('fast');
+            })
+        }) ">Timecard Approval</a>
+    </div>
+      
+    <!-- Page content -->
+    <div class="content">
+     <app-job-list></app-job-list>
+      <app-machine-list></app-machine-list>
+      <app-time-card-list [isUser]=false></app-time-card-list> 
+    </div> 

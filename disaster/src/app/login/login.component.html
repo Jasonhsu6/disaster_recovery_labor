@@ -1,0 +1,16 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">  
+    <h2 style="text-align: center;color: black;">Login</h2>
+    <br>
+      <!-- Login Form -->
+      <form [formGroup]="loginInfo">
+        <input type="text" name="onoenfs" class="fadeIn second" autocomplete="new-password"  placeholder="Username" formControlName="username">
+        <input type="password" name="fiwefei" class="fadeIn third"  placeholder="password" formControlName = "Password">
+        <br>
+        <br>
+        <button type="button" class="fadeIn fourth" (click)="onSubmit()">Login</button>
+        <button type="button" class="fadeIn fourth" (click)="back()">Back</button>
+      </form>
+  
+    </div>
+  </div>
