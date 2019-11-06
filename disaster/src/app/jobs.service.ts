@@ -33,6 +33,7 @@ export class JobsService {
     return data;
   }
   editJob(job_code,description,hourly_rate,mhpd,ID): Observable<any>{
+    console.log({job_code, description, hourly_rate, mhpd, ID});
     var data = this.http.put<JobModel>(this._url +"/"+ ID,{job_code,description,hourly_rate,mhpd},httpOptions).pipe(catchError(this.catcher))
     return data;
   }

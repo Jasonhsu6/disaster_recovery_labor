@@ -1,11 +1,83 @@
-<div class= "jobs" style="display: none;">
-<div class='content'>
-    <p>Job Code Management</p>
+<div class="modal fade" id="AddJob" tabindex="-1" role="dialog" 
+aria-labelledby="AddJob" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" 
+    role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">
+                    Add New Job
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addJob">
+                    <label>Job Code</label>
+                    <input type="text" formControlName="JobCode">
+                    <br>
+                    <label>Description</label>
+                    <input type="text" formControlName="Description">
+                    <br>
+                    <label>Hourly Rate</label>
+                    <input type="number" formControlName="Hourly_Rate">
+                    <br>
+                    <label>Max Hours Per Day</label>
+                    <input type="number" formControlName="Mhpd">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "refresh()">Close</button>
+                <button type="button" class="btn btn-primary" (click) ="add()">Add Job</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <button>Add New</button>
+<div class="modal fade" id="EditJob" tabindex="-1" role="dialog" aria-labelledby="EditJob" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Edit Job</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editJob">
+                    <label>Job Code</label>
+                    <input type="text" formControlName="JobCode">
+                    <br>
+                    <label>Description</label>
+                    <input type="text" formControlName="Description">
+                    <br>
+                    <label>Hourly Rate</label>
+                    <input type="number" formControlName="Hourly_Rate">
+                    <br>
+                    <label>Max Hours Per Day</label>
+                    <input type="number" formControlName="Mhpd">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="refresh()">Close</button>
+                <button type="button" class="btn btn-primary" (click) = "edit(id)">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class = "jobs" style="display: none;">
+    <div class='content'>
+        <p>Timecard Management</p>
+    </div>
+    
+    <div>
+        <button type = "button" data-toggle="modal" data-target="#AddJob">
+            Add New
+        </button>
+    </div>
 <p></p>
 
 
@@ -28,10 +100,12 @@
             <td>{{ job.hourly_rate | currency }}/Hr.</td>
             <td>{{ job.mhpd }} Hr.</td>
             <td>
-                <button>Edit</button>
+                <button data-toggle="modal" data-target="#EditJob" 
+                (click) = "editJobID(job._id)">Edit</button>
             </td>
             <td>
-                <button>Delete</button>
+                <button (click) = "delete(job._id)" 
+                (click) = "refresh()">Delete</button>
             </td>
         </tr>
     </tbody>
