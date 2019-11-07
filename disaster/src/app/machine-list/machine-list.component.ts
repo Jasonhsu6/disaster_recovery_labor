@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MachinesService } from '../machines.service';
 import {MachineModel} from '../MachineModel'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,14 +13,16 @@ export class MachineListComponent implements OnInit {
   public machines: Array<any>;
   public machine: MachineModel;
   public ID:number;
+  @Input() isAdmin: Boolean;
   constructor(private _data: MachinesService,private fp:FormBuilder, private route: ActivatedRoute, private router:Router) { 
   }
 
-addMachine:FormGroup
-editMachine:FormGroup
+  addMachine:FormGroup
+  editMachine:FormGroup
 
 
   ngOnInit() {
+    this.isAdmin = localStorage.getItem("isAdmin") == "true";
 
   this.addMachine = this.fp.group({
     MachineCode:["",[Validators.required]],
@@ -47,22 +49,22 @@ editMachine:FormGroup
       () => console.log("Finished"));
   }
 
-userCheck(data){
-  if(data.Result === "Not a user"){
-    this.router.navigateByUrl("/")
+  userCheck(data){
+    if(data.Result === "Not a user"){
+      this.router.navigateByUrl("/")
+    }
+    else{}
   }
-  else{}
-}
 
-editMachID(id){
-  this.ID = id
-}
+  editMachID(id){
+    this.ID = id
+  }
 
-refresh(){
-  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    this.router.navigate(['/admin']);
-})
-}
+  refresh(){
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/admin']);
+  })
+  }
 
   addMach(){
     console.log(this.addMachine.value)

@@ -13,10 +13,10 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
   }
 
-login(){
-  this.router.navigateByUrl("/login")
-}
-signup(){
-  this.router.navigateByUrl("/signup")
-}
+  login(){
+    this.router.navigateByUrl("/login");
+  }
+  signup(){
+    this.router.navigateByUrl("/signup");
+  }
 }

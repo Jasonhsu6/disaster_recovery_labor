@@ -7,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserviewComponent implements OnInit {
 
-  isUser = true
+  isAdmin: Boolean;
   constructor() { }
 
   ngOnInit() {
+    this.isAdmin = false;
   }
 
 }

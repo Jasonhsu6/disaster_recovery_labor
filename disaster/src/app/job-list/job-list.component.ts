@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { JobsService } from '../jobs.service';
 import { JobModel } from '../JobModel';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,13 +15,16 @@ export class JobListComponent implements OnInit {
   public id: number;
 
   constructor(private _data: JobsService, private fb: FormBuilder, 
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router) { 
+      
+    }
   
   addJob: FormGroup;
   editJob: FormGroup;
-
+  @Input() isAdmin: Boolean
 
   ngOnInit() {
+    this.isAdmin = localStorage.getItem("isAdmin") == "true";
     this._data.getJobs().subscribe(data => {
       if(data.Result === "Not a user"){
         console.log("Not a user, replace this with a redirect after the routes are made")

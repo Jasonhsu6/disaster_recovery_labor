@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'disaster';
-
+  title = 'Disaster Recovery';
+  public loggedin: Boolean;
   constructor(private route:Router){}
-
   Logout(){
-this.route.navigateByUrl("/")
+    this.loggedin = false;
+    this.route.navigateByUrl("/");
+    localStorage.removeItem('token');
   }
 }
