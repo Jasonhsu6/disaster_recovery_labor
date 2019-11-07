@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private _data:UsersService, private fp:FormBuilder,private router:Router) { }
 
   public loginInfo:FormGroup;
-  @Output() loggedin: boolean;
+  @Output() token: String;
 
 
   ngOnInit() {
@@ -29,13 +29,13 @@ export class LoginComponent implements OnInit {
     console.log("onSubmit clicked")
     this._data.Login(this.loginInfo.value.username,this.loginInfo.value.Password).subscribe(data => {
       console.log(data);
-      this.loggedin = true;
       if(data.Result === "No User Found"){
         console.log("No User Found");
       }
       else{
         localStorage.setItem("token",data.JWT);
         localStorage.setItem("isAdmin", data.isAdmin);
+        this.token = localStorage.getItem("token");
         if(data.isAdmin){
           this.router.navigateByUrl("/admin");
         }
