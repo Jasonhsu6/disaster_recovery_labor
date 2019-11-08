@@ -27,7 +27,7 @@ export class JobListComponent implements OnInit {
     this.isAdmin = localStorage.getItem("isAdmin") == "true";
     this._data.getJobs().subscribe(data => {
       if(data.Result === "Not a user"){
-        console.log("Not a user, replace this with a redirect after the routes are made")
+        this.router.navigateByUrl("/");
       }
       else{
         console.log(this.jobs)
