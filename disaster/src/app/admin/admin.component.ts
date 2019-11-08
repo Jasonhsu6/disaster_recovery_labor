@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  isAdmin: Boolean;
+  isAdmin: String;
 
   constructor(private router:Router) { }
 
   ngOnInit() {
-    this.isAdmin = localStorage.getItem("isAdmin") == "true";
+    this.isAdmin = localStorage.getItem("isAdmin");
     if(!this.isAdmin) {
       this.router.navigateByUrl("login");
     }

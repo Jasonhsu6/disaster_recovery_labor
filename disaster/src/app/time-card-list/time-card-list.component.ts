@@ -9,13 +9,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./time-card-list.component.css']
 })
 export class TimeCardListComponent implements OnInit {
-  @Input() isAdmin: boolean;
+  @Input('isAdmin') isAdmin: boolean;
   public timecards: Array<any>;
   public addTimecard:FormGroup
   constructor(private _data: TimeCardsService,private router:Router,private fp:FormBuilder) { }
 
   ngOnInit() {
-
+    console.log(this.isAdmin)
     this.addTimecard = this.fp.group({
       SiteCode:["",[Validators.required]],
       Contractor:["",[Validators.required]],

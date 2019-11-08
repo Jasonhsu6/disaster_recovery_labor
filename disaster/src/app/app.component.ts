@@ -19,4 +19,6 @@ export class AppComponent {
     this.route.navigateByUrl("/");
   }
   public token:string;
+
+  
 }
