@@ -82,7 +82,7 @@
             <td>Total hours</td>
             <td>Total Amounts</td>
             <td>Status</td>
-            <td *ngIf="isUser==false;">Delete</td>
+            <td *ngIf="isAdmin;">Delete</td>
         </tr>
     </thead>
 
@@ -92,7 +92,7 @@
             <td>{{ timecard.contractor }}</td>
             <td>{{ timecard.total_hours }} Hr.</td>
             <td>{{ timecard.total_amounts | currency }}</td>
-            <ng-container *ngIf = "isUser; else noUser">
+            <ng-container *ngIf = "!isAdmin; else noUser">
                     <ng-container *ngIf="timecard.is_approved; then approved; else pending"></ng-container>
                     <ng-template #approved>
                      <td>
@@ -111,6 +111,7 @@
              <td>
                  Approved
              </td>
+             <td></td>
             </ng-template>
             <ng-template #pending>
                 <td>

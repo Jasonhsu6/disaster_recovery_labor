@@ -9,7 +9,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./time-card-list.component.css']
 })
 export class TimeCardListComponent implements OnInit {
-  @Input('isUser') isUser: boolean;
+  @Input() isAdmin: boolean;
   public timecards: Array<any>;
   public addTimecard:FormGroup
   constructor(private _data: TimeCardsService,private router:Router,private fp:FormBuilder) { }
@@ -35,7 +35,7 @@ export class TimeCardListComponent implements OnInit {
   }
 
   refresh(){
-    if(this.isUser===false){
+    if(this.isAdmin===true){
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/admin']);
       })

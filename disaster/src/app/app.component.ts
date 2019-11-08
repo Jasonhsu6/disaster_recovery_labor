@@ -7,15 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'disaster';
-
-  constructor(private route:Router){  
-    this.token = localStorage.getItem('token')
+  title = 'Disaster Recovery';
+  public loggedin: Boolean;
+  constructor(private route:Router){
+    this.token = localStorage.getItem('token');
   }
-
   Logout(){
-this.route.navigateByUrl("/")
-localStorage.removeItem("token")
+    this.loggedin = false;
+    localStorage.removeItem('token');
+    this.token = "";
+    this.route.navigateByUrl("/");
   }
   public token:string;
 }

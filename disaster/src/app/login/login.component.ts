@@ -1,4 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, Output,  } from '@angular/core';
 import {FormGroup,FormsModule,FormBuilder, Validators} from '@angular/forms'
 import { UsersService } from '../users.service';
 import {UserModel} from '../UserModel';
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private _data:UsersService, private fp:FormBuilder,private router:Router) { }
 
-public loginInfo:FormGroup;
+  public loginInfo:FormGroup;
+  @Output() token: String;
 
 
   ngOnInit() {
@@ -27,17 +28,19 @@ public loginInfo:FormGroup;
   onSubmit(){
     console.log("onSubmit clicked")
     this._data.Login(this.loginInfo.value.username,this.loginInfo.value.Password).subscribe(data => {
-      console.log(data)
+      console.log(data);
       if(data.Result === "No User Found"){
-        console.log("No User Found")
+        console.log("No User Found");
       }
       else{
-        localStorage.setItem("token",data.JWT)
+        localStorage.setItem("token",data.JWT);
+        localStorage.setItem("isAdmin", data.isAdmin);
+        this.token = localStorage.getItem("token");
         if(data.isAdmin){
-          this.router.navigateByUrl("/admin")
+          this.router.navigateByUrl("/admin");
         }
         else{
-          this.router.navigateByUrl("/contractor")
+          this.router.navigateByUrl("/contractor");
         }
 
       }
