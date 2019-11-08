@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const Machine = require('../Schemas/MachineSchema')
 var Users = require("../Schemas/UserSchema");
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const secret = process.env.SECRET
 
 async function verify(token){
     try{
-        var decoded = jwt.verify(token,"secret");
+        var decoded = jwt.verify(token,secret);
    const docs = await Users.find({username:decoded.Username,hash_password: decoded.Password})
        if(docs.length > 0){
            console.log("True")

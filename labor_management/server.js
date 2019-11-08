@@ -1,8 +1,9 @@
 var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
-var PORT = 3000;
-var url = "mongodb://jasonnelson:jasonnelson1@ds141168.mlab.com:41168/heroku_b67cn7n5"
+require('dotenv').config()
+var PORT = process.env.PORT;
+var url = process.env.MONGOURL
 const jobs = require("./Routes/jobs");
 const machines = require("./Routes/machines");
 const timecards = require("./Routes/timecards");

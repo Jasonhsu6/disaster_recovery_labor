@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 var Users = require("../Schemas/UserSchema");
 var hash = require('object-hash');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const secret = process.env.SECRET
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -17,12 +19,12 @@ function genJWTCode(username, password) {
     var token = jwt.sign({
         "Username": username,
         "Password": hashpass
-    },"secret")
+    },secret)
     return token
 }
 async function verify(token){
     try{
-          var decoded = jwt.verify(token,"secret");
+          var decoded = jwt.verify(token,SECRET);
   const docs = await Users.find({username:decoded.Username,hash_password: decoded.Password})
       if(docs.length > 0){
           console.log("True")
