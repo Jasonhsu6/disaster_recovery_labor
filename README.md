@@ -13,3 +13,13 @@ To try out, all you have to do is:
 * In one Terminal/Command Prompt, run `ng serve` in Disaster.
 * In another, run `nodemon server` in Labor_Management.
 * Finally, watch the magic happen [here](http://localhost:4200/ "Disaster Recovery Labor").
+
+
+
+fix later: 
+1. relational schema: 
+    job schema: new field machine, 
+    timecard schema: total amount calculation, remove total amount from add new timecard UI, add job code relationship
+    machine schema: available
+2. logout button: use a docheck lifecycle component
+3. Validation field for the timecard, confirmation message
