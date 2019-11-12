@@ -19,7 +19,7 @@ To try out, all you have to do is:
 fix later: 
 1. relational schema: 
     job schema: new field machine, 
-    timecard schema: total amount calculation, remove total amount from add new timecard UI, add job code relationship
+    timecard schema: total amount calculation, remove total amount from add new timecard UI, add job code relationship (Select Options)
     machine schema: available
 2. logout button: use a docheck lifecycle component
 3. Validation field for the timecard, confirmation message
