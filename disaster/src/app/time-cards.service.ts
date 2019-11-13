@@ -26,12 +26,12 @@ export class TimeCardsService {
     var data = this.http.get<any>(this._url +  "/" + id,httpOptions).pipe(catchError(this.catcher))
     return data;
   }
-  addTimeCard(site_code,contractor,total_hours,total_amounts,is_approved): Observable<any>{
-    var data = this.http.post<any>(this._url + "/add",{site_code,contractor,total_hours,total_amounts,is_approved},httpOptions).pipe(catchError(this.catcher))
+  addTimeCard(site_code,contractor,total_hours,job_code,is_approved): Observable<any>{
+    var data = this.http.post<any>(this._url + "/add",{site_code,contractor,total_hours,job_code,is_approved},httpOptions).pipe(catchError(this.catcher))
     return data;
   }
-  ApproveTimeCard(site_code,contractor,total_hours,total_amounts,is_approved,ID): Observable<any>{
-    var data = this.http.put<any>(this._url +"/"+ ID,{site_code,contractor,total_hours,total_amounts,is_approved},httpOptions).pipe(catchError(this.catcher))
+  ApproveTimeCard(site_code,contractor,total_hours,job_code,is_approved,ID): Observable<any>{
+    var data = this.http.put<any>(this._url +"/"+ ID,{site_code,contractor,total_hours,job_code,is_approved},httpOptions).pipe(catchError(this.catcher))
     return data;
   }
   deleteTimeCard(ID): Observable<any>{

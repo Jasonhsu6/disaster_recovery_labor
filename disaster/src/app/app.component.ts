@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'Disaster Recovery';
   public loggedin: Boolean;
   constructor(private route:Router){
-    this.token = localStorage.getItem('token');
+    setInterval(()=> this.token = localStorage.getItem('token'),50)
   }
   Logout(){
     this.loggedin = false;
@@ -19,6 +19,4 @@ export class AppComponent {
     this.route.navigateByUrl("/");
   }
   public token:string;
-
-  
 }

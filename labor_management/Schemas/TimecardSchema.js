@@ -3,8 +3,8 @@ var mongoose = require("mongoose");
 var TimeCard = mongoose.Schema({
     site_code: String,
     contractor: String,
+    job_code:String,
     total_hours: Number,
-    total_amounts: Number,
     is_approved: Boolean
 })
 
